@@ -1,0 +1,4 @@
+<div class="d-flex flex-row">
+  <input class="form-control-file" type="file" #fileInput (change)="onFileInput(fileInput.files)"/>
+  <button class="btn btn-primary" (click)="onSubmit()">Submit</button>
+</div>
