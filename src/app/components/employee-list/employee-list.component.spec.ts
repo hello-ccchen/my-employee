@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 
 import { EmployeeListComponent } from './employee-list.component';
 
@@ -19,7 +20,29 @@ describe('EmployeeListComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it('should render correct row color based on employeeStatus', () => {
+    const mockEmployee = [
+      {
+          employeeNumber: '001',
+          firstName: 'John',
+          lastName: 'Doe',
+          employeeStatus: 'Regular'
+      },
+      {
+        employeeNumber: '002',
+        firstName: 'Jane',
+        lastName: 'Doe',
+        employeeStatus: 'Contractor'
+    }
+    ];
+    component.record = mockEmployee;
+
+    fixture.detectChanges();
+
+    const row1 = fixture.debugElement.query(By.css('table>tbody>tr:nth-child(1)'));
+    expect(row1.classes['green-row']).toBeTruthy();
+
+    const row2 = fixture.debugElement.query(By.css('table>tbody>tr:nth-child(2)'));
+    expect(row2.classes['yellow-row']).toBeTruthy();
   });
 });
